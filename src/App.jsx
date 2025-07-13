@@ -1,17 +1,13 @@
-import './App.css'
+import './App.css';
+import { AppCards } from './components/AppCards';
 
 function App() {
-
   return (
     <>
       <h1>Anna&apos;s Home Page</h1>
-      <div className="card">
-        <p>
-          Coming soon!
-        </p>
-      </div>
+      <AppCards />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
