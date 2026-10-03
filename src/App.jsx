@@ -1,4 +1,4 @@
-import './App.css';
+import { Box, Container, Link, Stack, Typography } from '@mui/material';
 import { AppCards } from './components/AppCards';
 import { ThemeToggle } from './components/ThemeToggle';
 
@@ -13,67 +13,170 @@ const SITE = {
   resume: '', // link to a résumé PDF
 };
 
+const external = { target: '_blank', rel: 'noopener noreferrer' };
+
 function App() {
   const year = new Date().getFullYear();
 
   return (
-    <div className="page">
-      <header className="site-header">
-        <a href="#top" className="wordmark">
+    <Container
+      maxWidth={false}
+      sx={{
+        maxWidth: 1440,
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        px: { xs: 2, sm: 5, lg: 10 },
+        pt: { xs: 3, sm: 5, lg: 7 },
+        pb: { xs: 4, sm: 6, lg: 8 },
+      }}
+    >
+      <Box
+        component="header"
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 2,
+          pb: 3,
+          borderBottom: 1,
+          borderColor: 'rule',
+        }}
+      >
+        <Link
+          href="#top"
+          variant="mono"
+          sx={{ fontSize: 15, fontWeight: 500, letterSpacing: '0.02em' }}
+        >
           {SITE.domain}
-        </a>
-        <nav className="site-nav" aria-label="Main">
+        </Link>
+        <Stack
+          component="nav"
+          aria-label="Main"
+          direction="row"
+          alignItems="center"
+          spacing={{ xs: 3, sm: 5 }}
+        >
           {SITE.github && (
-            <a href={SITE.github} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={SITE.github}
+              variant="mono"
+              sx={{ py: 1.5 }}
+              {...external}
+            >
               GitHub ↗
-            </a>
+            </Link>
           )}
           {SITE.linkedin && (
-            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={SITE.linkedin}
+              variant="mono"
+              sx={{ py: 1.5 }}
+              {...external}
+            >
               LinkedIn ↗
-            </a>
+            </Link>
           )}
-          {SITE.email && <a href={`mailto:${SITE.email}`}>Contact</a>}
           <ThemeToggle />
-        </nav>
-      </header>
+        </Stack>
+      </Box>
 
-      <main>
-        <section id="top" className="hero">
-          <h1 className="hero-title">
-            {SITE.name} <em>software developer.</em>
-          </h1>
-          <div className="hero-aside">
-            {SITE.bio && <p>{SITE.bio}</p>}
-            {SITE.email && (
-              <a className="mono" href={`mailto:${SITE.email}`}>
-                {SITE.email} →
-              </a>
+      <Box component="main" sx={{ pb: 15 }}>
+        <Box
+          id="top"
+          component="section"
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              md: 'repeat(12, minmax(0, 1fr))',
+            },
+            columnGap: 3,
+            rowGap: 4,
+            alignItems: 'end',
+            py: { xs: 7, lg: 12 },
+          }}
+        >
+          <Typography variant="h1" sx={{ gridColumn: { md: 'span 9' } }}>
+            {SITE.name}{' '}
+            <Box component="em" sx={{ color: 'primary.main' }}>
+              software developer.
+            </Box>
+          </Typography>
+          <Stack
+            spacing={2}
+            sx={{ gridColumn: { md: 'span 3' }, pb: 1.5, maxWidth: 520 }}
+          >
+            {SITE.bio && (
+              <Typography color="text.secondary">{SITE.bio}</Typography>
             )}
-          </div>
-        </section>
+            {SITE.email && (
+              <Link
+                href={`mailto:${SITE.email}`}
+                variant="mono"
+                sx={{ py: 1.5 }}
+              >
+                {SITE.email} →
+              </Link>
+            )}
+          </Stack>
+        </Box>
 
-        <div id="work" className="section-head">
-          <h2>Selected work</h2>
-          <span className="mono muted">Hover to preview · click to visit</span>
-        </div>
+        <Box
+          id="work"
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+            flexWrap: 'wrap',
+            gap: 1,
+            columnGap: 3,
+            pb: 4,
+          }}
+        >
+          <Typography variant="h2" sx={{ fontSize: { xs: 36, sm: 44 } }}>
+            Selected work
+          </Typography>
+          <Typography variant="mono" color="text.tertiary">
+            Hover to preview · click to visit
+          </Typography>
+        </Box>
 
         <AppCards />
-      </main>
+      </Box>
 
-      <footer id="about" className="site-footer">
-        <span className="muted-strong">
+      <Box
+        id="about"
+        component="footer"
+        sx={{
+          mt: 'auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 1,
+          columnGap: 3,
+          pt: 3,
+          borderTop: 1,
+          borderColor: 'rule',
+        }}
+      >
+        <Typography variant="mono" color="text.secondary">
           © {year} {SITE.name}
-        </span>
-        <div className="footer-links">
-          {SITE.resume && (
-            <a href={SITE.resume} target="_blank" rel="noopener noreferrer">
-              Résumé ↗
-            </a>
-          )}
-        </div>
-      </footer>
-    </div>
+        </Typography>
+        {SITE.resume && (
+          <Link
+            href={SITE.resume}
+            variant="mono"
+            sx={{ py: 1.5 }}
+            {...external}
+          >
+            Résumé ↗
+          </Link>
+        )}
+      </Box>
+    </Container>
   );
 }
 

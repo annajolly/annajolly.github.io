@@ -12,9 +12,11 @@
     </script>
     <meta charset="UTF-8" />
     <script>
+      // Apply the saved MUI color scheme before React loads (avoids a flash).
       try {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        var mode = localStorage.getItem('mui-mode') || 'system';
+        var dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.add(dark ? 'dark' : 'light');
       } catch (e) {}
     </script>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />

@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import { AppCard } from './AppCard';
 import CardImage from '../images/my-media-diary.png';
 
@@ -16,10 +17,12 @@ const cards = [
 
 export const AppCards = () => {
   return (
-    <div className="card-grid">
+    <Grid container spacing={{ xs: 3, md: 4 }}>
       {cards.map((card, i) => (
-        <AppCard key={card.id} index={i} {...card} />
+        <Grid key={card.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+          <AppCard index={i} {...card} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
