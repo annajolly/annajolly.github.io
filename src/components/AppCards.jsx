@@ -1,7 +1,7 @@
-import { Box, Grid } from '@mui/material';
 import { AppCard } from './AppCard';
 import CardImage from '../images/my-media-diary.png';
 
+// `stack` and `year` are optional; add more projects to this list.
 const cards = [
   {
     id: 0,
@@ -9,22 +9,17 @@ const cards = [
     description: 'Web app to track movies watched and books read',
     link: 'https://my-media-diary-auth.web.app',
     image: CardImage,
+    stack: [],
+    year: '',
   },
 ];
 
 export const AppCards = () => {
   return (
-    <Grid container>
-      {cards.map(({ id, title, description, link, image }) => (
-        <Grid key={id} size={{ sx: '12', md: '6' }}>
-          <AppCard
-            title={title}
-            description={description}
-            link={link}
-            image={image}
-          />
-        </Grid>
+    <div className="card-grid">
+      {cards.map((card, i) => (
+        <AppCard key={card.id} index={i} {...card} />
       ))}
-    </Grid>
+    </div>
   );
 };
