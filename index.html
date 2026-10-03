@@ -11,11 +11,24 @@
       gtag('config', 'G-586TWX0382');
     </script>
     <meta charset="UTF-8" />
+    <script>
+      // Apply the saved MUI color scheme before React loads (avoids a flash).
+      try {
+        var mode = localStorage.getItem('mui-mode') || 'system';
+        var dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.add(dark ? 'dark' : 'light');
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
     <title>Anna Jolly's Portfolio</title>
-    <script type="module" crossorigin src="/assets/index-CKkgqBsk.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-sh3xwRq8.css">
+    <script type="module" crossorigin src="/assets/index-4HsWMdDD.js"></script>
   </head>
   <body>
     <div id="root"></div>
